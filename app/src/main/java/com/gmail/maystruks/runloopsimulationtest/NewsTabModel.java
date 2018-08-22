@@ -1,10 +1,7 @@
-package com.gmail.maystruks.runloopsimulationtest.fragments;
+package com.gmail.maystruks.runloopsimulationtest;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import com.gmail.maystruks.runloopsimulationtest.News;
-import com.gmail.maystruks.runloopsimulationtest.Loader;
-import com.gmail.maystruks.runloopsimulationtest.TypeOfNews;
 
 import java.util.ArrayList;
 
@@ -23,37 +20,9 @@ public class NewsTabModel implements IGetNews.Model {
 
         new WorkAsync().execute(typeNews);
 
-//        Handler handler = new Handler(context.getMainLooper());
-//        handler.post( new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                CountDownLatch countDownLatch = new CountDownLatch(2);
-//
-//                new WorkAsync(countDownLatch).execute(TypeOfNews.BUSINESS_NEWS);
-//                new WorkAsync(countDownLatch).execute(TypeOfNews.ENVIRONMENT_ENTERTAINMENT_NEWS);
-//
-//                try {
-//                    countDownLatch.await();
-//
-//                    if(mapNews.get(typeNews) != null)
-//                    onGetNewsListener.onGetNewsSuccess(mapNews.get(typeNews));
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            }
-//        } );
     }
 
     private class WorkAsync extends AsyncTask<Integer, Void, ArrayList<News>> {
-
-//        CountDownLatch countDownLatch;
-//
-//        public WorkAsync(CountDownLatch countDownLatch) {
-//            this.countDownLatch = countDownLatch;
-//        }
 
         @Override
         protected ArrayList<News> doInBackground(Integer... idNews) {

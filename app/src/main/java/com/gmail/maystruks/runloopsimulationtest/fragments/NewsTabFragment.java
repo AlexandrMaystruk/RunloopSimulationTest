@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.gmail.maystruks.runloopsimulationtest.IGetNews;
 import com.gmail.maystruks.runloopsimulationtest.News;
+import com.gmail.maystruks.runloopsimulationtest.NewsTabPresenter;
 import com.gmail.maystruks.runloopsimulationtest.R;
 import com.gmail.maystruks.runloopsimulationtest.adapters.RecyclerNewsListAdapter;
 

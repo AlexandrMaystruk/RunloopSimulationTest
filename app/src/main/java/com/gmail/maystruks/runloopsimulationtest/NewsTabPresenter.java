@@ -1,7 +1,7 @@
-package com.gmail.maystruks.runloopsimulationtest.fragments;
+package com.gmail.maystruks.runloopsimulationtest;
 
 import android.content.Context;
-import com.gmail.maystruks.runloopsimulationtest.News;
+
 import java.util.List;
 
 public class NewsTabPresenter implements IGetNews.Presenter, IGetNews.OnGetNewsListener {

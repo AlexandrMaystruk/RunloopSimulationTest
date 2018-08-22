@@ -1,4 +1,4 @@
-package com.gmail.maystruks.runloopsimulationtest.fragments;
+package com.gmail.maystruks.runloopsimulationtest;
 
 import android.content.Context;
 import com.gmail.maystruks.runloopsimulationtest.News;
