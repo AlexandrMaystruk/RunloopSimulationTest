@@ -1,0 +1,22 @@
+<resources>
+
+
+    <string name="app_name">RunloopSimulationTest</string>
+    <string name="menu_favorites">Favorites</string>
+    <string name="menu_downloads">Downloads</string>
+
+
+    <string name="tv_name">Alexander</string>
+    <string name="tv_clock">wait..</string>
+    <string name="tv_date">21.08.2018</string>
+
+    <string name="activity_news">News</string>
+
+    <string name="tab_business">Business</string>
+    <string name="tab_entert_envir">Entert and Envir  </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
