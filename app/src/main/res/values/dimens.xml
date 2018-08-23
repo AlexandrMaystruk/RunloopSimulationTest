@@ -7,6 +7,7 @@
 
 
     <dimen name="margin_toolbar">54dp</dimen>
+    <dimen name="margin_bottom_bar">56dp</dimen>
 
 
 </resources>

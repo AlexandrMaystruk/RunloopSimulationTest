@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import java.util.ArrayList;
 
 
-
 public class NewsTabModel implements IGetNews.Model {
 
     IGetNews.OnGetNewsListener onGetNewsListener;
@@ -50,7 +49,12 @@ public class NewsTabModel implements IGetNews.Model {
         @Override
         protected void onPostExecute(ArrayList<News> news) {
 
-            onGetNewsListener.onGetNewsSuccess(news);
+            if(news == null){
+                onGetNewsListener.onGetNewsFailure("Can't get news");
+            } else {
+                onGetNewsListener.onGetNewsSuccess(news);
+            }
+
 
         }
     }

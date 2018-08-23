@@ -13,6 +13,8 @@ public interface IGetNews {
 
         void onGetNewsSuccess(List<News> hikes);
         void onGetNewsFailure(String message);
+        void showProgress();
+        void hideProgress();
 
     }
 

@@ -17,18 +17,21 @@ public class NewsTabPresenter implements IGetNews.Presenter, IGetNews.OnGetNewsL
     @Override
     public void getNews(Context context, int typeNews) {
 
+        view.showProgress();
         model.getNews(context, typeNews);
     }
 
     @Override
     public void onGetNewsSuccess(List<News> newsList) {
 
+        view.hideProgress();
         view.onGetNewsSuccess(newsList);
     }
 
     @Override
     public void onGetNewsFailure(String message) {
 
+        view.hideProgress();
         onGetNewsFailure(message);
 
     }
