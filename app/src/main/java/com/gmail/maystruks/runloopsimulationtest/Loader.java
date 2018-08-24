@@ -2,16 +2,16 @@ package com.gmail.maystruks.runloopsimulationtest;
 
 import android.util.Log;
 import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Loader {
 
@@ -97,6 +97,12 @@ public class Loader {
 
                 if (title != null && description != null && dataOfPublication != null) {
                     if (isItem) {
+
+                        Matcher matcher = Pattern.compile("<div class").matcher(description);
+                        if (matcher.find()) {
+                            description = description.substring(0, matcher.start());
+                        }
+
                         News item = new News(title, description, dataOfPublication);
                         items.add(item);
                     }

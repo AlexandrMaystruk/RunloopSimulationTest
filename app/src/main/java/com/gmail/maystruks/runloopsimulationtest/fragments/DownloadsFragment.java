@@ -59,7 +59,7 @@ public class DownloadsFragment extends Fragment {
         newsBusinessTabFragment.setTypeNews(TypeOfNews.BUSINESS_NEWS);
 
         NewsTabFragment newsEnvirEntertTabFragment = new NewsTabFragment();
-        newsEnvirEntertTabFragment.setTypeNews(TypeOfNews.ENVIRONMENT_NEWS);
+        newsEnvirEntertTabFragment.setTypeNews(TypeOfNews.ENVIRONMENT_ENTERTAINMENT_NEWS);
 
 
         sectionsPagerAdapter.addFragment(newsBusinessTabFragment, getString(R.string.tab_business));

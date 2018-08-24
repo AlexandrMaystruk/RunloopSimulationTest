@@ -1,23 +1,20 @@
 package com.gmail.maystruks.runloopsimulationtest;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
 
 public class NewsTabModel implements IGetNews.Model {
 
-
     private IGetNews.OnGetNewsListener onGetNewsListener;
+    private SparseArray<ArrayList<News>> arrayNews = new SparseArray<>();
     private Handler handler;
-    private HashMap<Integer, ArrayList<News>> map = new HashMap<>();
 
     public NewsTabModel(IGetNews.OnGetNewsListener onGetNewsListener) {
         this.onGetNewsListener = onGetNewsListener;
@@ -26,33 +23,38 @@ public class NewsTabModel implements IGetNews.Model {
     @Override
     public void getNews(final Context context, final int typeNews) {
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
+        handler = new Handler(Looper.getMainLooper()) {
             @Override
-            public void run() {
+            public void handleMessage(Message message) {
 
-                handler = new Handler(Looper.getMainLooper()) {
-                    @Override
-                    public void handleMessage(Message message) {
-
-                        onGetNewsListener.onGetNewsSuccess(map.get(typeNews));
-                    }
-                };
+                onGetNewsListener.onGetNewsSuccess(arrayNews.get(typeNews));
             }
-        });
+        };
 
+        execute(TypeOfNews.BUSINESS_NEWS, TypeOfNews.ENVIRONMENT_NEWS, TypeOfNews.ENTERTAINMENT_NEWS);
+
+    }
+
+    private void execute(final int... listId) {
+
+        final CountDownLatch countDownLatch = new CountDownLatch(listId.length);
 
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                CountDownLatch countDownLatch = new CountDownLatch(3);
+                for (int idNew : listId) {
 
-                new Task(countDownLatch, TypeOfNews.BUSINESS_NEWS).run();
-                new Task(countDownLatch, TypeOfNews.ENVIRONMENT_NEWS).run();
-                new Task(countDownLatch, TypeOfNews.ENTERTAINMENT_NEWS).run();
+                    new TaskStartThread(new TaskGetNews(countDownLatch, idNew)).run();
 
+                }
                 try {
                     countDownLatch.await();
+
+                    ArrayList<News> list = new ArrayList<>(arrayNews.get(TypeOfNews.ENVIRONMENT_NEWS));
+                    list.addAll(arrayNews.get(TypeOfNews.ENTERTAINMENT_NEWS));
+
+                    arrayNews.put(TypeOfNews.ENVIRONMENT_ENTERTAINMENT_NEWS, list);
                     handler.sendMessage(handler.obtainMessage());
 
                 } catch (InterruptedException e) {
@@ -61,16 +63,28 @@ public class NewsTabModel implements IGetNews.Model {
             }
         });
         thread.start();
-
     }
 
+    private class TaskStartThread implements Runnable {
 
-    private class Task implements Runnable {
+        private TaskGetNews taskGetNews;
 
-        CountDownLatch countDownLatch;
-        int idNews;
+        TaskStartThread(TaskGetNews taskGetNews) {
+            this.taskGetNews = taskGetNews;
+        }
 
-        private Task(CountDownLatch countDownLatch, int idNews) {
+        @Override
+        public void run() {
+            taskGetNews.run();
+        }
+    }
+
+    private class TaskGetNews implements Runnable {
+
+        private CountDownLatch countDownLatch;
+        private int idNews;
+
+        TaskGetNews(CountDownLatch countDownLatch, int idNews) {
             this.countDownLatch = countDownLatch;
             this.idNews = idNews;
         }
@@ -83,18 +97,18 @@ public class NewsTabModel implements IGetNews.Model {
             switch (idNews) {
 
                 case TypeOfNews.BUSINESS_NEWS:
-                    map.put(TypeOfNews.BUSINESS_NEWS, loader.loadBusinessNews());
+                    arrayNews.put(TypeOfNews.BUSINESS_NEWS, loader.loadBusinessNews());
                     countDownLatch.countDown();
                     break;
 
                 case TypeOfNews.ENTERTAINMENT_NEWS:
-                    map.put(TypeOfNews.ENTERTAINMENT_NEWS, loader.loadEntertainmentNews());
+                    arrayNews.put(TypeOfNews.ENTERTAINMENT_NEWS, loader.loadEntertainmentNews());
                     countDownLatch.countDown();
                     break;
 
                 case TypeOfNews.ENVIRONMENT_NEWS:
 
-                    map.put(TypeOfNews.ENVIRONMENT_NEWS, loader.loadEnvironmentNews());
+                    arrayNews.put(TypeOfNews.ENVIRONMENT_NEWS, loader.loadEnvironmentNews());
                     countDownLatch.countDown();
                     break;
 
@@ -104,7 +118,10 @@ public class NewsTabModel implements IGetNews.Model {
             }
         }
     }
-
-
 }
+
+
+
+
+
 

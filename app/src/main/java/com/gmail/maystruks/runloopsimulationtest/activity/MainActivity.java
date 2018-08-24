@@ -1,6 +1,5 @@
 package com.gmail.maystruks.runloopsimulationtest.activity;
 
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -17,9 +16,7 @@ import com.gmail.maystruks.runloopsimulationtest.fragments.FavoritesFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private BottomNavigationView bottomNavigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
 
                     case R.id.action_favorites:
-                        bottomNavigationView.setBackgroundResource(R.color.colorBlue);
                         setFragment(new FavoritesFragment());
                         return true;
 
                     case R.id.action_downloads:
-                        bottomNavigationView.setBackgroundResource(R.color.colorGreen);
                         setFragment(new DownloadsFragment());
                         return true;
 
@@ -53,25 +48,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class Task extends AsyncTask<Void, Void, Void> {
-
-
-        String nameThread;
-
-        public Task(String nameThread) {
-            this.nameThread = nameThread;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            System.err.println(nameThread + "___________________________________________________________________________________");
-
-            return null;
-        }
-    }
-
-
     private void bindViews() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -80,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
 
         setFragment(new FavoritesFragment());
-        bottomNavigationView.setBackgroundResource(R.color.colorBlue);
 
     }
 
