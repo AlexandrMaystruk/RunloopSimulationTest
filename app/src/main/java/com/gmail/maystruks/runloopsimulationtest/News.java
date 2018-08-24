@@ -1,6 +1,9 @@
 package com.gmail.maystruks.runloopsimulationtest;
 
-public class News {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class News implements Parcelable {
 
     private String title = null;
     private String description = null;
@@ -20,6 +23,24 @@ public class News {
         this.description = description;
         this.date = date;
     }
+
+    protected News(Parcel in) {
+        title = in.readString();
+        description = in.readString();
+        date = in.readString();
+    }
+
+    public static final Creator<News> CREATOR = new Creator<News>() {
+        @Override
+        public News createFromParcel(Parcel in) {
+            return new News(in);
+        }
+
+        @Override
+        public News[] newArray(int size) {
+            return new News[size];
+        }
+    };
 
     public String getTitle() {
         return title;
@@ -45,4 +66,17 @@ public class News {
         this.date = date;
     }
 
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(date);
+    }
 }

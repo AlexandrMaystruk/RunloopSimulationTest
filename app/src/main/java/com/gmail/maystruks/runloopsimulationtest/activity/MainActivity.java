@@ -1,5 +1,6 @@
 package com.gmail.maystruks.runloopsimulationtest.activity;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,11 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import com.gmail.maystruks.runloopsimulationtest.R;
 import com.gmail.maystruks.runloopsimulationtest.fragments.DownloadsFragment;
 import com.gmail.maystruks.runloopsimulationtest.fragments.FavoritesFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,9 +51,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private class Task extends AsyncTask<Void, Void, Void> {
 
 
+        String nameThread;
 
+        public Task(String nameThread) {
+            this.nameThread = nameThread;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            System.err.println(nameThread + "___________________________________________________________________________________");
+
+            return null;
+        }
     }
 
 

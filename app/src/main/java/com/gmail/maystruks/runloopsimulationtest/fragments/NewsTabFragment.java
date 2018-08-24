@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import com.gmail.maystruks.runloopsimulationtest.IGetNews;
 import com.gmail.maystruks.runloopsimulationtest.News;
 import com.gmail.maystruks.runloopsimulationtest.NewsTabPresenter;
 import com.gmail.maystruks.runloopsimulationtest.R;
 import com.gmail.maystruks.runloopsimulationtest.adapters.RecyclerNewsListAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -65,6 +67,7 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new RecyclerNewsListAdapter(view.getContext(), new ArrayList<News>());
         recyclerView.setAdapter(adapter);
+
     }
 
 
@@ -72,14 +75,17 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
     public void onResume() {
         super.onResume();
 
+
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+
                 presenter.getNews(getContext(), getTypeNews());
 
             }
         }, 0, 5000);
+
 
     }
 

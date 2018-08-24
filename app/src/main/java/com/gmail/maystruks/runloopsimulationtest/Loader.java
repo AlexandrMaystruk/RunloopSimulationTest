@@ -29,7 +29,7 @@ public class Loader {
     }
 
 
-    public ArrayList<News> getNews(String urlRss) {
+    private ArrayList<News> getNews(String urlRss) {
         ArrayList<News> listNews = new ArrayList<>();
         try {
             URL url = new URL(urlRss);
@@ -43,8 +43,6 @@ public class Loader {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         }
-
-//        latch.countDown();
         return listNews;
     }
 
