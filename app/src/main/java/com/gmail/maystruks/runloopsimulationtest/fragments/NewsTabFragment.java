@@ -57,10 +57,12 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
 
     private void bindView() {
         recyclerView = view.findViewById(R.id.recycler_view_business);
-        progressBar = view.findViewById(R.id.spinner_progress);
+        progressBar = Objects.requireNonNull(getActivity()).findViewById(R.id.spinner_progress);
+
     }
 
     private void init() {
+
 
         presenter = new NewsTabPresenter(this);
         layoutManager = new LinearLayoutManager(view.getContext());
@@ -75,7 +77,6 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
     public void onResume() {
         super.onResume();
 
-
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -85,8 +86,6 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
 
             }
         }, 0, 5000);
-
-
     }
 
     @Override
@@ -115,7 +114,7 @@ public class NewsTabFragment extends Fragment implements IGetNews.View {
 
         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
             public void run() {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
     }

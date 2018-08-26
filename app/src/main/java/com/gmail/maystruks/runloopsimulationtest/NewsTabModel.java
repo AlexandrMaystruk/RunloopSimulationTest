@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.SparseArray;
-
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 

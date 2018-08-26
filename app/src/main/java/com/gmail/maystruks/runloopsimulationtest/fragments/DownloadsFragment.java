@@ -7,9 +7,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import com.gmail.maystruks.runloopsimulationtest.R;
 import com.gmail.maystruks.runloopsimulationtest.TypeOfNews;
 import com.gmail.maystruks.runloopsimulationtest.adapters.SectionsPagerAdapter;
+
 import java.util.Objects;
 
 public class DownloadsFragment extends Fragment {
@@ -19,6 +22,7 @@ public class DownloadsFragment extends Fragment {
 
     private ViewPager mViewPager;
     private TabLayout tabLayout;
+    ProgressBar progressBar;
 
     public DownloadsFragment() {
 
@@ -35,11 +39,11 @@ public class DownloadsFragment extends Fragment {
 
     }
 
-
     private void bindsView() {
 
         tabLayout = view.findViewById(R.id.top_tabs);
         mViewPager = view.findViewById(R.id.container);
+        progressBar = view.findViewById(R.id.spinner_progress);
     }
 
     private void init() {

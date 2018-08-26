@@ -17,6 +17,8 @@ import com.gmail.maystruks.runloopsimulationtest.fragments.FavoritesFragment;
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
+    private FragmentManager fragmentManager;
+    private int currentPageId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,42 +31,41 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                if (currentPageId == menuItem.getItemId()) {
+                    return false;
+                } else {
+                    currentPageId = menuItem.getItemId();
+                    switch (menuItem.getItemId()) {
 
-                switch (menuItem.getItemId()) {
+                        case R.id.action_favorites:
+                            setFragment(new FavoritesFragment());
+                            return true;
 
-                    case R.id.action_favorites:
-                        setFragment(new FavoritesFragment());
-                        return true;
+                        case R.id.action_downloads:
+                            setFragment(new DownloadsFragment());
+                            return true;
 
-                    case R.id.action_downloads:
-                        setFragment(new DownloadsFragment());
-                        return true;
-
-                    default:
-                        return false;
+                        default:
+                            return false;
+                    }
                 }
-
             }
         });
     }
 
     private void bindViews() {
-
         bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
     private void init() {
 
+        fragmentManager = getSupportFragmentManager();
         setFragment(new FavoritesFragment());
-
     }
 
     private void setFragment(Fragment fragment) {
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.containerBottomTabs, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.replace(R.id.containerBottomTabs, fragment).commit();
     }
 
 

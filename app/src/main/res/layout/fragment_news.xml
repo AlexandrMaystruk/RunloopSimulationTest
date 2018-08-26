@@ -4,19 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="@dimen/margin_bottom_bar"
     tools:context=".fragments.NewsTabFragment">
-
-    <ProgressBar
-        android:id="@+id/spinner_progress"
-        android:layout_width="@dimen/text_big_size"
-        android:layout_height="@dimen/text_big_size"
-        android:layout_gravity="top|center_vertical"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_business"
