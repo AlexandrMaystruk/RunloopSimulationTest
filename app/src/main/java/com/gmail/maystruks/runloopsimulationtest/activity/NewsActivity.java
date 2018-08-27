@@ -34,7 +34,7 @@ public class NewsActivity extends AppCompatActivity {
         newsDescription = getIntent().getStringExtra(TAG);
         toolbar = findViewById(R.id.toolbar_news);
         tvDescription = findViewById(R.id.tv_news_description_activity);
-        if (!tvDescription.equals("")) {
+        if (newsDescription != null) {
             tvDescription.setText(newsDescription);
         }
 
